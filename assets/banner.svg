@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d" />
+      <stop offset="50%" stop-color="#07152b" />
+      <stop offset="100%" stop-color="#0d1b3a" />
+    </linearGradient>
+
+    <!-- Shield Glow & Fill -->
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#4facfe" />
+    </linearGradient>
+
+    <!-- Text Gradient -->
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="50%" stop-color="#e0f2fe" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+
+    <!-- Accent Gradient -->
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="shieldGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    /* CSS Keyframe Animations */
+    @keyframes pulseGrid {
+      0%, 100% { opacity: 0.15; }
+      50% { opacity: 0.35; }
+    }
+
+    @keyframes flowPacket1 {
+      0% { stroke-dashoffset: 400; }
+      100% { stroke-dashoffset: 0; }
+    }
+
+    @keyframes flowPacket2 {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: 400; }
+    }
+
+    @keyframes shieldPulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.03); opacity: 1; filter: drop-shadow(0 0 15px #38bdf8); }
+    }
+
+    @keyframes scanline {
+      0% { transform: translateY(-100px); opacity: 0; }
+      50% { opacity: 0.4; }
+      100% { transform: translateY(360px); opacity: 0; }
+    }
+
+    @keyframes floatParticle {
+      0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
+      50% { transform: translateY(-15px) translateX(10px); opacity: 0.8; }
+    }
+
+    .grid-bg {
+      animation: pulseGrid 6s ease-in-out infinite;
+    }
+
+    .packet-line-1 {
+      stroke-dasharray: 20 200;
+      animation: flowPacket1 3s linear infinite;
+    }
+
+    .packet-line-2 {
+      stroke-dasharray: 30 180;
+      animation: flowPacket2 4s linear infinite;
+    }
+
+    .shield-icon {
+      transform-origin: 1020px 180px;
+      animation: shieldPulse 4s ease-in-out infinite;
+    }
+
+    .scan-bar {
+      animation: scanline 8s linear infinite;
+    }
+
+    .p1 { animation: floatParticle 5s ease-in-out infinite; }
+    .p2 { animation: floatParticle 7s ease-in-out infinite 1s; }
+    .p3 { animation: floatParticle 6s ease-in-out infinite 2s; }
+
+    /* Foreground Text Styling to guarantee readability */
+    .title-text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 800;
+      font-size: 46px;
+      fill: url(#textGrad);
+    }
+
+    .subtitle-text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+      fill: #94a3b8;
+    }
+
+    .badge-pill {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      fill: #38bdf8;
+    }
+  </style>
+
+  <!-- Background Base -->
+  <rect width="1200" height="360" rx="16" fill="url(#bgGrad)" />
+
+  <!-- Animated Tech Grid Background -->
+  <g class="grid-bg" stroke="#38bdf8" stroke-width="1">
+    <path d="M 0,60 L 1200,60 M 0,120 L 1200,120 M 0,180 L 1200,180 M 0,240 L 1200,240 M 0,300 L 1200,300" stroke-opacity="0.15" />
+    <path d="M 150,0 L 150,360 M 300,0 L 300,360 M 450,0 L 450,360 M 600,0 L 600,360 M 750,0 L 750,360 M 900,0 L 900,360 M 1050,0 L 1050,360" stroke-opacity="0.15" />
+  </g>
+
+  <!-- Animated Floating Data Lines (Behind Text & Shield) -->
+  <g stroke-linecap="round">
+    <!-- Stream 1 -->
+    <path d="M 50,80 Q 300,20 600,80 T 1150,80" fill="none" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.2" />
+    <path d="M 50,80 Q 300,20 600,80 T 1150,80" fill="none" stroke="#00f2fe" stroke-width="3" class="packet-line-1" filter="url(#glow)" />
+
+    <!-- Stream 2 -->
+    <path d="M 50,280 Q 400,340 700,280 T 1150,280" fill="none" stroke="#818cf8" stroke-width="2" stroke-opacity="0.2" />
+    <path d="M 50,280 Q 400,340 700,280 T 1150,280" fill="none" stroke="#818cf8" stroke-width="3" class="packet-line-2" filter="url(#glow)" />
+  </g>
+
+  <!-- Ambient Scanning Beam -->
+  <rect x="0" y="0" width="1200" height="2" fill="#38bdf8" opacity="0.5" class="scan-bar" filter="url(#glow)" />
+
+  <!-- Floating Glowing Particles -->
+  <circle cx="120" cy="100" r="3" fill="#38bdf8" class="p1" />
+  <circle cx="480" cy="240" r="4" fill="#818cf8" class="p2" />
+  <circle cx="750" cy="90" r="3" fill="#00f2fe" class="p3" />
+  <circle cx="320" cy="290" r="3" fill="#c084fc" class="p1" />
+
+  <!-- Right Side Decorative Animated Shield (Stays cleanly on right, never overlaps text) -->
+  <g class="shield-icon">
+    <!-- Outer Shield Halo -->
+    <path d="M 1020,90 L 1100,125 V 195 C 1100,240 1020,270 1020,270 C 1020,270 940,240 940,195 V 125 Z" 
+          fill="none" stroke="url(#shieldGrad)" stroke-width="4" opacity="0.6" filter="url(#shieldGlow)" />
+    
+    <!-- Inner Solid Shield -->
+    <path d="M 1020,105 L 1085,133 V 190 C 1085,228 1020,252 1020,252 C 1020,252 955,228 955,190 V 133 Z" 
+          fill="#07152b" stroke="url(#shieldGrad)" stroke-width="3" />
+
+    <!-- Lock Icon inside Shield -->
+    <path d="M 1008,180 V 170 C 1008,163 1013,158 1020,158 C 1027,158 1032,163 1032,170 V 180" 
+          fill="none" stroke="#38bdf8" stroke-width="3.5" stroke-linecap="round" />
+    <rect x="1002" y="180" width="36" height="28" rx="5" fill="url(#shieldGrad)" />
+    <circle cx="1020" cy="192" r="3" fill="#07152b" />
+  </g>
+
+  <!-- Foreground Main Text & Branding (Guaranteed foreground visibility) -->
+  <g transform="translate(80, 0)">
+    <!-- Pill Badge -->
+    <g transform="translate(0, 72)">
+      <rect width="210" height="32" rx="16" fill="#0f2744" stroke="#1e40af" stroke-width="1.5" />
+      <circle cx="18" cy="16" r="5" fill="#10b981" />
+      <text x="32" y="21" class="badge-pill">LAYER 7 DEFENSE &amp; WAAP</text>
+    </g>
+
+    <!-- Main Title -->
+    <text x="0" y="155" class="title-text" filter="drop-shadow(0 2px 8px rgba(0,0,0,0.8))">
+      Awesome Web Application Firewall
+    </text>
+
+    <!-- Decorative Underline Accent -->
+    <rect x="0" y="175" width="460" height="4" rx="2" fill="url(#accentGrad)" />
+
+    <!-- Subtitle Line 1 -->
+    <text x="0" y="222" class="subtitle-text">
+      Curated SaaS Platforms &amp; Open-Source WAF Engines
+    </text>
+
+    <!-- Subtitle Line 2 / Feature Chips -->
+    <g transform="translate(0, 255)">
+      <!-- Chip 1 -->
+      <rect width="130" height="28" rx="6" fill="#1e293b" stroke="#334155" />
+      <text x="14" y="18" font-family="sans-serif" font-size="12" font-weight="600" fill="#38bdf8">🛡️ OWASP CRS v4</text>
+
+      <!-- Chip 2 -->
+      <rect x="142" width="145" height="28" rx="6" fill="#1e293b" stroke="#334155" />
+      <text x="156" y="18" font-family="sans-serif" font-size="12" font-weight="600" fill="#a7f3d0">⚡ ModSecurity &amp; Go</text>
+
+      <!-- Chip 3 -->
+      <rect x="299" width="150" height="28" rx="6" fill="#1e293b" stroke="#334155" />
+      <text x="313" y="18" font-family="sans-serif" font-size="12" font-weight="600" fill="#fef08a">☁️ Cloud WAF Comparison</text>
+    </g>
+  </g>
+</svg>
